@@ -124,12 +124,14 @@ class FreedomPop(object):
 
         utils.logger.info('Making a %s request to %s with "%s"...',
                           method, endpoint, params)
+        
+        headers = {'user-agent': 'Dalvik/2.1.0 (Linux; U; Android 7.1.1; Nokia 2 Build/NMF26F)'}
 
         if method == 'GET':
-            response = requests.get(url, params=params, auth=auth)
+            response = requests.get(url, headers=headers, params=params, auth=auth)
         elif method == 'POST' or method == 'PUT':
-            response = requests.request(method=method, url=url, params=params,
-                                        auth=auth, data=data, files=files)
+            response = requests.request(method=method, url=url, headers=headers, 
+                                        params=params, auth=auth, data=data, files=files)
         utils.logger.info('Response: ' + response.content.decode('utf8'))
 
         utils.logger.info('Request finished.')
