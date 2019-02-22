@@ -54,7 +54,8 @@ class FreedomPop(object):
             params = {'grant_type': 'password',
                       'username': self.username,
                       'password': self.password}
-            response = requests.post(url, auth=auth, params=params)
+            headers = {'user-agent': 'Dalvik/2.1.0 (Linux; U; Android 7.1.1; Nokia 2 Build/NMF26F)'}
+            response = requests.post(url, headers=headers, auth=auth, params=params)
             data = json.loads(response.content.decode('utf8'))
             # The references are no longer in use. Destroy them.
             self.password = None
